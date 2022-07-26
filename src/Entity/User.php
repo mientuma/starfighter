@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -26,6 +28,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\OneToMany(mappedBy: 'Owner', targetEntity: Planet::class)]
+    private Collection $planets;
+
+    public function __construct()
+    {
+        $this->planets = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -95,5 +105,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, Planet>
+     */
+    public function getPlanets(): Collection
+    {
+        return $this->planets;
+    }
+
+    public function addPlanet(Planet $planet): self
+    {
+        if (!$this->planets->contains($planet)) {
+            $this->planets[] = $planet;
+            $planet->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlanet(Planet $planet): self
+    {
+        if ($this->planets->removeElement($planet)) {
+            // set the owning side to null (unless already changed)
+            if ($planet->getOwner() === $this) {
+                $planet->setOwner(null);
+            }
+        }
+
+        return $this;
     }
 }
