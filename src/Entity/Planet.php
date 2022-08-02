@@ -33,6 +33,9 @@ class Planet
     #[ORM\Column(nullable: true)]
     private ?int $metalMine = null;
 
+    #[ORM\Column]
+    private ?int $MetalPerHour = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,6 +109,18 @@ class Planet
     public function setMetalMine(?int $metalMine): self
     {
         $this->metalMine = $metalMine;
+
+        return $this;
+    }
+
+    public function getMetalPerHour(): ?int
+    {
+        return $this->MetalPerHour;
+    }
+
+    public function setMetalPerHour(int $MetalPerHour): self
+    {
+        $this->MetalPerHour = $MetalPerHour;
 
         return $this;
     }
