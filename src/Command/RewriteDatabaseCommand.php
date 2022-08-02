@@ -6,6 +6,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 #[AsCommand(
@@ -14,6 +15,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 )]
 class RewriteDatabaseCommand extends Command
 {
+    /**
+     * @throws \Exception
+     */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $app = $this->getApplication();
@@ -57,13 +61,14 @@ class RewriteDatabaseCommand extends Command
         ];
         $dataFixturesInput = new ArrayInput($argumentsDataFixtures);
 
+        $nullOutput = new NullOutput();
 
         // Runs all scripts
-        $dropDatabase->run($dropDatabaseInput, $output);
-        $createDatabase->run($createDatabaseInput, $output);
-        $makeMigration->run($makeMigrationInput, $output);
-        $migrationMigrate->run($migrationMigrateInput, $output);
-        $schemaUpdate->run($schemaUpdateInput, $output);
-        $dataFixtures->run($dataFixturesInput, $output);
+        $dropDatabase->run($dropDatabaseInput, $nullOutput);
+        $createDatabase->run($createDatabaseInput, $nullOutput);
+        $makeMigration->run($makeMigrationInput, $nullOutput);
+        $migrationMigrate->run($migrationMigrateInput, $nullOutput);
+        $schemaUpdate->run($schemaUpdateInput, $nullOutput);
+        $dataFixtures->run($dataFixturesInput, $nullOutput);
     }
 }
