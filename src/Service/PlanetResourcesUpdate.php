@@ -17,15 +17,15 @@ class PlanetResourcesUpdate
     public function planetResourcesUpdate($id): void
     {
         $planet = $this->em->getRepository(Planet::class)->find($id);
-        $lastUpdate = ($planet->getLastUpdate())->getTimestamp();
+        $lastUpdate = $planet->getLastUpdate();
         $currentDateTime = (new \DateTime('now'))->getTimestamp();
         $timeDifference = $currentDateTime - $lastUpdate;
-        $metalPerHour = $planet->getMetalPerHour();
-        $metalPerSecond = $metalPerHour/360;
-        $metalDifference = $metalPerSecond * $timeDifference;
-        $updatedMetal = $planet->getPlanetMetal() + $metalDifference;
+
+        $metalPerSecond = ($planet->getMetalPerHour())/360;
+        $updatedMetal = $planet->getPlanetMetal() + $metalPerSecond * $timeDifference;
+
         $planet->setPlanetMetal($updatedMetal);
-        $planet->setLastUpdate(new \DateTime('now'));
+        $planet->setLastUpdate($currentDateTime);
         $this->em->persist($planet);
         $this->em->flush();
     }

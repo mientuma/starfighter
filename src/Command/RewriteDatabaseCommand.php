@@ -65,9 +65,9 @@ class RewriteDatabaseCommand extends Command
         // Runs all scripts
         $dropDatabase->run($dropDatabaseInput, $output);
         $createDatabase->run($createDatabaseInput, $output);
+        $schemaUpdate->run($schemaUpdateInput, $output);
         $makeMigration->run($makeMigrationInput, $output);
         $migrationMigrate->run($migrationMigrateInput, $output);
-        $schemaUpdate->run($schemaUpdateInput, $output);
         $dataFixtures->run($dataFixturesInput, $output);
     }
 }

@@ -27,8 +27,8 @@ class Planet
     #[ORM\Column(nullable: true)]
     private ?int $PlanetMetal = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $lastUpdate = null;
+    #[ORM\Column(nullable: false)]
+    private ?int $lastUpdate = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $metalMine = null;
@@ -89,12 +89,12 @@ class Planet
         return $this;
     }
 
-    public function getLastUpdate(): ?\DateTimeInterface
+    public function getLastUpdate(): ?int
     {
         return $this->lastUpdate;
     }
 
-    public function setLastUpdate(\DateTimeInterface $lastUpdate): self
+    public function setLastUpdate(?int $lastUpdate): self
     {
         $this->lastUpdate = $lastUpdate;
 

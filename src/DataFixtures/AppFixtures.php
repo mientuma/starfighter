@@ -59,7 +59,7 @@ class AppFixtures extends Fixture
     private function getPlanetsData(): array
     {
         return [
-            ['1', 'Planet 1', 200, 800, new \DateTime('now'), 16, 6000]
+            ['1', 'Planet 1', 200, 800, (new \DateTime('now'))->getTimestamp(), 16, 6000]
         ];
     }
 }
