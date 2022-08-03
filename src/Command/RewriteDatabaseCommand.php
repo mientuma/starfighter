@@ -17,6 +17,7 @@ class RewriteDatabaseCommand extends Command
 {
     /**
      * @throws \Exception
+     * @throws \Symfony\Component\Console\Exception\ExceptionInterface
      */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
@@ -61,14 +62,12 @@ class RewriteDatabaseCommand extends Command
         ];
         $dataFixturesInput = new ArrayInput($argumentsDataFixtures);
 
-        $nullOutput = new NullOutput();
-
         // Runs all scripts
-        $dropDatabase->run($dropDatabaseInput, $nullOutput);
-        $createDatabase->run($createDatabaseInput, $nullOutput);
-        $makeMigration->run($makeMigrationInput, $nullOutput);
-        $migrationMigrate->run($migrationMigrateInput, $nullOutput);
-        $schemaUpdate->run($schemaUpdateInput, $nullOutput);
-        $dataFixtures->run($dataFixturesInput, $nullOutput);
+        $dropDatabase->run($dropDatabaseInput, $output);
+        $createDatabase->run($createDatabaseInput, $output);
+        $makeMigration->run($makeMigrationInput, $output);
+        $migrationMigrate->run($migrationMigrateInput, $output);
+        $schemaUpdate->run($schemaUpdateInput, $output);
+        $dataFixtures->run($dataFixturesInput, $output);
     }
 }
