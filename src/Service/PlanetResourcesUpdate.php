@@ -18,7 +18,7 @@ class PlanetResourcesUpdate
     {
         $planet = $this->em->getRepository(Planet::class)->find($id);
         $lastUpdate = $planet->getLastUpdate();
-        $currentTime = (new \DateTime('now'))->getTimestamp();
+        $currentTime = time();
         $timeDifference = $currentTime - $lastUpdate;
 
         $metalPerSecond = ($planet->getMetalPerHour())/360;

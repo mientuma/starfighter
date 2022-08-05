@@ -30,6 +30,9 @@ class Planet
     private ?int $lastUpdate = null;
 
     #[ORM\Column(nullable: true)]
+    private ?int $buildingsQueueEndTime = null;
+
+    #[ORM\Column(nullable: true)]
     private ?int $metalMineLevel = null;
 
     #[ORM\Column]
@@ -100,6 +103,18 @@ class Planet
         return $this;
     }
 
+    public function getBuildingsQueueEndTime(): ?int
+    {
+        return $this->buildingsQueueEndTime;
+    }
+
+    public function setBuildingsQueueEndTime(?int $buildingsQueueEndTime): self
+    {
+        $this->buildingsQueueEndTime = $buildingsQueueEndTime;
+
+        return $this;
+    }
+
     public function getMetalMineLevel(): ?int
     {
         return $this->metalMineLevel;
@@ -123,4 +138,5 @@ class Planet
 
         return $this;
     }
+
 }
