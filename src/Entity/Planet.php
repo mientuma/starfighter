@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\PlanetRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PlanetRepository::class)]
@@ -15,26 +14,26 @@ class Planet
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Name = null;
+    private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'planets')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $Owner = null;
+    private ?User $owner = null;
 
     #[ORM\Column]
-    private ?int $Fields = null;
+    private ?int $fields = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $PlanetMetal = null;
+    private ?int $planetMetal = null;
 
     #[ORM\Column(nullable: false)]
     private ?int $lastUpdate = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $metalMine = null;
+    private ?int $metalMineLevel = null;
 
     #[ORM\Column]
-    private ?int $MetalPerHour = null;
+    private ?int $metalPerHour = null;
 
     public function getId(): ?int
     {
@@ -43,48 +42,48 @@ class Planet
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): self
+    public function setName(string $name): self
     {
-        $this->Name = $Name;
+        $this->name = $name;
 
         return $this;
     }
 
     public function getOwner(): ?User
     {
-        return $this->Owner;
+        return $this->owner;
     }
 
-    public function setOwner(?User $Owner): self
+    public function setOwner(?User $owner): self
     {
-        $this->Owner = $Owner;
+        $this->owner = $owner;
 
         return $this;
     }
 
     public function getFields(): ?int
     {
-        return $this->Fields;
+        return $this->fields;
     }
 
-    public function setFields(int $Fields): self
+    public function setFields(int $fields): self
     {
-        $this->Fields = $Fields;
+        $this->fields = $fields;
 
         return $this;
     }
 
     public function getPlanetMetal(): ?int
     {
-        return $this->PlanetMetal;
+        return $this->planetMetal;
     }
 
-    public function setPlanetMetal(?int $PlanetMetal): self
+    public function setPlanetMetal(?int $planetMetal): self
     {
-        $this->PlanetMetal = $PlanetMetal;
+        $this->planetMetal = $planetMetal;
 
         return $this;
     }
@@ -101,26 +100,26 @@ class Planet
         return $this;
     }
 
-    public function getMetalMine(): ?int
+    public function getMetalMineLevel(): ?int
     {
-        return $this->metalMine;
+        return $this->metalMineLevel;
     }
 
-    public function setMetalMine(?int $metalMine): self
+    public function setMetalMineLevel(?int $metalMineLevel): self
     {
-        $this->metalMine = $metalMine;
+        $this->metalMineLevel = $metalMineLevel;
 
         return $this;
     }
 
     public function getMetalPerHour(): ?int
     {
-        return $this->MetalPerHour;
+        return $this->metalPerHour;
     }
 
-    public function setMetalPerHour(int $MetalPerHour): self
+    public function setMetalPerHour(int $metalPerHour): self
     {
-        $this->MetalPerHour = $MetalPerHour;
+        $this->metalPerHour = $metalPerHour;
 
         return $this;
     }

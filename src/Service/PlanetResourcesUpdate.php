@@ -18,14 +18,14 @@ class PlanetResourcesUpdate
     {
         $planet = $this->em->getRepository(Planet::class)->find($id);
         $lastUpdate = $planet->getLastUpdate();
-        $currentDateTime = (new \DateTime('now'))->getTimestamp();
-        $timeDifference = $currentDateTime - $lastUpdate;
+        $currentTime = (new \DateTime('now'))->getTimestamp();
+        $timeDifference = $currentTime - $lastUpdate;
 
         $metalPerSecond = ($planet->getMetalPerHour())/360;
         $updatedMetal = $planet->getPlanetMetal() + $metalPerSecond * $timeDifference;
 
         $planet->setPlanetMetal($updatedMetal);
-        $planet->setLastUpdate($currentDateTime);
+        $planet->setLastUpdate($currentTime);
         $this->em->persist($planet);
         $this->em->flush();
     }

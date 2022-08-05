@@ -12,6 +12,8 @@ class MainController extends AbstractController
     #[Route('/', name: 'sf_mainView')]
     public function index(): Response
     {
+        $time = time();
+        dump($time);
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
         ]);

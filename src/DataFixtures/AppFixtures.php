@@ -30,7 +30,7 @@ class AppFixtures extends Fixture
 
     private function loadPlanets(ObjectManager $manager)
     {
-        foreach ($this->getPlanetsData() as [$ownerId, $name, $fields, $planetMetal, $lastUpdate, $metalMine, $metalPerHour])
+        foreach ($this->getPlanetsData() as [$ownerId, $name, $fields, $planetMetal, $lastUpdate, $metalMineLevel, $metalPerHour])
         {
             $planet = new Planet();
             $owner = $manager->getRepository(User::class)->find($ownerId);
@@ -39,7 +39,7 @@ class AppFixtures extends Fixture
             $planet->setFields($fields);
             $planet->setPlanetMetal($planetMetal);
             $planet->setLastUpdate($lastUpdate);
-            $planet->setMetalMine($metalMine);
+            $planet->setMetalMineLevel($metalMineLevel);
             $planet->setMetalPerHour($metalPerHour);
             $manager->persist($planet);
         }
