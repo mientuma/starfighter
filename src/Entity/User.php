@@ -29,7 +29,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\OneToMany(mappedBy: 'Owner', targetEntity: Planet::class)]
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Planet::class)]
     private Collection $planets;
 
     public function __construct()
