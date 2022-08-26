@@ -21,13 +21,13 @@ class MainController extends AbstractController
     }
 
     #[Route('/planet/{id}', name: 'sf_planetView')]
-    public function planetView(int $id, PlanetResourcesUpdate $planetResourcesUpdate, BuildBuilding $buildBuilding): Response
+    public function planetView(int $planetId, PlanetResourcesUpdate $planetResourcesUpdate, BuildBuilding $buildBuilding): Response
     {
-        $planetResourcesUpdate->planetResourcesUpdate($id);
-        $buildBuilding->addBuildingToBuildingQueue($id);
-        $buildBuilding->buildingLevelUpdate($id);
+        $planetResourcesUpdate->planetResourcesUpdate($planetId);
+        $buildBuilding->addBuildingToBuildingQueue($planetId);
+        $buildBuilding->buildingLevelUpdate($planetId);
         return $this->render('main/index.html.twig', [
-            'controller_name' => $id,
+            'controller_name' => $planetId,
         ]);
     }
 }

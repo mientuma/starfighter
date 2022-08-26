@@ -14,9 +14,9 @@ class PlanetResourcesUpdate
         $this->em = $em;
     }
 
-    public function planetResourcesUpdate($id): void
+    public function planetResourcesUpdate($planetId): void
     {
-        $planet = $this->em->getRepository(Planet::class)->find($id);
+        $planet = $this->em->getRepository(Planet::class)->find($planetId);
         $lastUpdate = $planet->getLastUpdate();
         $currentTime = time();
         $timeDifference = $currentTime - $lastUpdate;

@@ -14,6 +14,20 @@ class BuildBuilding
         $this->em = $em;
     }
 
+    public function addBuildingToBuildingQueue($planetId): void
+    {
+        $planet = $this->em->getRepository(Planet::class)->find($planetId);
+        $buildingQueueEndTime = $planet->getBuildingsQueueEndTime();
+
+        if ($buildingQueueEndTime == null)
+        {
+            $buildingQueueEndTime = time() + 30;
+            $planet->setBuildingsQueueEndTime($buildingQueueEndTime);
+            $this->em->persist($planet);
+            $this->em->flush();
+        }
+    }
+
     public function buildingLevelUpdate($planetId): void
     {
         $planet = $this->em->getRepository(Planet::class)->find($planetId);
